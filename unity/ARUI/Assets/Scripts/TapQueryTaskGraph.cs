@@ -6,6 +6,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Robotics.ROSTCPConnector;
+using RosMessageTypes.Angel;
 
 
 public class TapQueryTaskGraph : MonoBehaviour, IMixedRealityInputActionHandler
@@ -61,16 +63,6 @@ public class TapQueryTaskGraph : MonoBehaviour, IMixedRealityInputActionHandler
             AngelARUI.Instance.SetCurrentTaskID(currentTask);
         }
 
-        if (Input.GetKeyUp(KeyCode.D))
-        {
-            AngelARUI.Instance.SetTasks(tasks2);
-        }
-
-        if (Input.GetKeyUp(KeyCode.S))
-        {
-            AngelARUI.Instance.SetTasks(tasks);
-        }
-
         if (Input.GetKeyUp(KeyCode.Space))
         {
             AngelARUI.Instance.ToggleTasklist();
@@ -81,45 +73,55 @@ public class TapQueryTaskGraph : MonoBehaviour, IMixedRealityInputActionHandler
     {
         Logger log = logger();
         log.LogInfo("Got taskGraphMsg: " + msg);
-        int[,] edges = msg.node_edges;
         
-        List<string> tasks = new List<string>();
+	List<uint> edges = new List<uint>();
+	edges.AddRange(msg.node_edges);
+        List<List<string>> tasks = new List<List<string>>();
         
         int taskIdx = 0;
-        int curTask = edges[taskIdx];
+        uint curTask = edges[taskIdx];
 
-        string[,] elem = {"0", msg.task_nodes[curTask]};
+        List<string> elem = new List<string>{"0", msg.task_nodes[curTask].name};
         tasks.Add(elem);
 
-        int nextTask = edges[taskIdx+1];
+        uint nextTask = edges[taskIdx+1];
 
         // remove pair form list
-        edges.erase(edges.begin() + (taskIdx+1));
-        edges.erase(edges.begin() + taskIdx);
+        edges.RemoveAt(taskIdx+1);
+        edges.RemoveAt(taskIdx);
         
-        int num_pairs = (sizeof(edges)/sizeof(edges[0]))/2;
+        int num_pairs = edges.Count/2;
 
         for (int i=0; i<=num_pairs; i++)
         {
             curTask = nextTask;
-            taskIdx = std::distance(edges, std::find(edges.begin(), edges.end(), curTask));
+            taskIdx = edges.IndexOf(curTask);
             
-            elem = {"0", msg.task_nodes[curTask]};
+            elem[0] = "0";
+	    elem[1] = msg.task_nodes[curTask].name;
             tasks.Add(elem);
 
             nextTask = edges[taskIdx+1];
 
             // remove pair form list
-            edges.erase(edges.begin() + (taskIdx+1));
-            edges.erase(edges.begin() + taskIdx);
+            edges.RemoveAt(taskIdx+1);
+            edges.RemoveAt(taskIdx);
         }
         // Add the last task
-        elem = {"0", msg.task_nodes[nextTask]};
+        elem[0] = "0";
+	elem[1] = msg.task_nodes[nextTask].name;
         tasks.Add(elem);
 
         // Send tasks to ARUI
         log.LogInfo("Setting task list: " + tasks);
-        AngelARUI.Instance.SetTasks(tasks.ToArray());
+        
+	string[,] final_tasks = new string[tasks.Count, 2];
+	for(int i=0; i<tasks.Count; i++)
+	{
+		final_tasks[i, 0] = tasks[i][0];
+		final_tasks[i, 1] = tasks[i][1];
+	}
+	AngelARUI.Instance.SetTasks(final_tasks);
     }
 
     private IEnumerator AddIfHit(BaseInputEventData eventData)
