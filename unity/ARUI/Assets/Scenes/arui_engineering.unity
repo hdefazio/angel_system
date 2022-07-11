@@ -966,7 +966,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1485002826}
-  - component: {fileID: 1485002825}
+  - component: {fileID: 1485002827}
   m_Layer: 0
   m_Name: AngelARUITest
   m_TagString: Untagged
@@ -974,18 +974,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1485002825
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1485002824}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d674ff7b4a94e04d9a5dad6a0718a37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1485002826
 Transform:
   m_ObjectHideFlags: 0
@@ -1000,6 +988,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1485002827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1485002824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 955033ec2e1c38d489dbdd8a1c02e131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  querytaskgraphTopicName: query_task_graph
 --- !u!1 &1676318194
 GameObject:
   m_ObjectHideFlags: 0
