@@ -113,14 +113,14 @@ public class TapQueryTaskGraph : MonoBehaviour, IMixedRealityInputActionHandler
         tasks.Add(elem);
 
         // Send tasks to ARUI
-        log.LogInfo("Setting task list: " + tasks);
-        
 	string[,] final_tasks = new string[tasks.Count, 2];
 	for(int i=0; i<tasks.Count; i++)
 	{
 		final_tasks[i, 0] = tasks[i][0];
 		final_tasks[i, 1] = tasks[i][1];
 	}
+        
+	log.LogInfo("Setting task list: " + tasks);
 	AngelARUI.Instance.SetTasks(final_tasks);
     }
 
