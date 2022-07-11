@@ -86,7 +86,9 @@ public class TapQueryTaskGraph : MonoBehaviour, IMixedRealityInputActionHandler
         
         int taskIdx = 0;
         int curTask = edges[taskIdx];
-        tasks.push_back({"0", msg.task_nodes[curTask]});
+
+        string[,] elem = {"0", msg.task_nodes[curTask]};
+        tasks.push_back(elem);
 
         int nextTask = edges[taskIdx+1];
 
@@ -100,7 +102,9 @@ public class TapQueryTaskGraph : MonoBehaviour, IMixedRealityInputActionHandler
         {
             curTask = nextTask;
             taskIdx = std::distance(edges, std::find(edges.begin(), edges.end(), curTask));
-            tasks.push_back({"0", msg.task_nodes[curTask]});
+            
+            elem = {"0", msg.task_nodes[curTask]};
+            tasks.push_back(elem);
 
             nextTask = edges[taskIdx+1];
 
