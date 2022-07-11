@@ -74,8 +74,8 @@ public class TapQueryTaskGraph : MonoBehaviour, IMixedRealityInputActionHandler
         Logger log = logger();
         log.LogInfo("Got taskGraphMsg: " + msg);
         
-	List<uint> edges = new List<uint>();
-	edges.AddRange(msg.node_edges);
+        List<uint> edges = new List<uint>();
+        edges.AddRange(msg.node_edges);
         List<List<string>> tasks = new List<List<string>>();
         
         int taskIdx = 0;
@@ -98,7 +98,7 @@ public class TapQueryTaskGraph : MonoBehaviour, IMixedRealityInputActionHandler
             taskIdx = edges.IndexOf(curTask);
             
             elem[0] = "0";
-	    elem[1] = msg.task_nodes[curTask].name;
+            elem[1] = msg.task_nodes[curTask].name;
             tasks.Add(elem);
 
             nextTask = edges[taskIdx+1];
@@ -109,7 +109,7 @@ public class TapQueryTaskGraph : MonoBehaviour, IMixedRealityInputActionHandler
         }
         // Add the last task
         elem[0] = "0";
-	elem[1] = msg.task_nodes[nextTask].name;
+        elem[1] = msg.task_nodes[nextTask].name;
         tasks.Add(elem);
 
         // Send tasks to ARUI
