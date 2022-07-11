@@ -86,7 +86,7 @@ public class TapQueryTaskGraph : MonoBehaviour, IMixedRealityInputActionHandler
         
         int taskIdx = 0;
         int curTask = edges[taskIdx];
-        tasks.append({"0", msg.task_nodes[curTask]});
+        tasks.push_back({"0", msg.task_nodes[curTask]});
 
         int nextTask = edges[taskIdx+1];
 
@@ -100,7 +100,7 @@ public class TapQueryTaskGraph : MonoBehaviour, IMixedRealityInputActionHandler
         {
             curTask = nextTask;
             taskIdx = std::distance(edges, std::find(edges.begin(), edges.end(), curTask));
-            tasks.append({"0", msg.task_nodes[curTask]});
+            tasks.push_back({"0", msg.task_nodes[curTask]});
 
             nextTask = edges[taskIdx+1];
 
@@ -109,7 +109,7 @@ public class TapQueryTaskGraph : MonoBehaviour, IMixedRealityInputActionHandler
             edges.erase(edges.begin() + taskIdx);
         }
         // Add the last task
-        tasks.append({"0", msg.task_nodes[nextTask]});
+        tasks.push_back({"0", msg.task_nodes[nextTask]});
 
         // Send tasks to ARUI
         log.LogInfo("Setting task list: " + tasks);
