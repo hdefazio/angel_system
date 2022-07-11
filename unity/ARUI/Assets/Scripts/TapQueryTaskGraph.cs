@@ -113,7 +113,8 @@ public class TapQueryTaskGraph : MonoBehaviour, IMixedRealityInputActionHandler
             edges.erase(edges.begin() + taskIdx);
         }
         // Add the last task
-        tasks.push_back({"0", msg.task_nodes[nextTask]});
+        elem = {"0", msg.task_nodes[nextTask]};
+        tasks.push_back(elem);
 
         // Send tasks to ARUI
         log.LogInfo("Setting task list: " + tasks);
