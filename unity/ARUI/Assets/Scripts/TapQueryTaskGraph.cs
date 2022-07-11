@@ -82,20 +82,21 @@ public class TapQueryTaskGraph : MonoBehaviour, IMixedRealityInputActionHandler
         Logger log = logger();
         log.LogInfo("Got taskGraphMsg: " + msg);
         int[,] edges = msg.node_edges;
-        string[,] tasks = {};
+        
+        List<string> tasks = new List<string>();
         
         int taskIdx = 0;
         int curTask = edges[taskIdx];
 
         string[,] elem = {"0", msg.task_nodes[curTask]};
-        tasks.push_back(elem);
+        tasks.Add(elem);
 
         int nextTask = edges[taskIdx+1];
 
         // remove pair form list
         edges.erase(edges.begin() + (taskIdx+1));
         edges.erase(edges.begin() + taskIdx);
-
+        
         int num_pairs = (sizeof(edges)/sizeof(edges[0]))/2;
 
         for (int i=0; i<=num_pairs; i++)
@@ -104,7 +105,7 @@ public class TapQueryTaskGraph : MonoBehaviour, IMixedRealityInputActionHandler
             taskIdx = std::distance(edges, std::find(edges.begin(), edges.end(), curTask));
             
             elem = {"0", msg.task_nodes[curTask]};
-            tasks.push_back(elem);
+            tasks.Add(elem);
 
             nextTask = edges[taskIdx+1];
 
@@ -114,11 +115,11 @@ public class TapQueryTaskGraph : MonoBehaviour, IMixedRealityInputActionHandler
         }
         // Add the last task
         elem = {"0", msg.task_nodes[nextTask]};
-        tasks.push_back(elem);
+        tasks.Add(elem);
 
         // Send tasks to ARUI
         log.LogInfo("Setting task list: " + tasks);
-        AngelARUI.Instance.SetTasks(tasks);
+        AngelARUI.Instance.SetTasks(tasks.ToArray());
     }
 
     private IEnumerator AddIfHit(BaseInputEventData eventData)
