@@ -44,6 +44,11 @@ RUN apt-get -y update \
 ENV NVIDIA_VISIBLE_DEVICES all
 ENV NVIDIA_DRIVER_CAPABILITIES graphics,utility,compute
 
+# For demo ui
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - 
+RUN apt-get install -y nodejs
+RUN npm i -s express
+
 # Bring in poetry for standard python package installation.
 # NODE: Installing "dev" dependencies here because why not. Stop if the desire
 #       becomes to create a minimal image.
