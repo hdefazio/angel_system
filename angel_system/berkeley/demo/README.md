@@ -13,4 +13,4 @@ python ./demo/demo_step_pred.py --input /shared/niudt/DATASET/PTG_Kitware/all_ac
 
 This will save the predictions in the ```your_save_path```.
 
-Note that you may need to modify the Re_order function in line 138, this fuction is to re-order the images in your input_images_path, the goal is to read to read the images in a sequential order, the current version is customized to re_order the images based on the name of the frames with the format of  ```frame_XXXXX_XXXXXXXXXXX_XXXXXXXXXXX.png```.
+Note that you may need to modify the ```Re_order``` function in line 138, this fuction is to re-order the images in your input_images_path, the goal is to read to read the images in a sequential order, the current version is customized to re_order the images based on the name of the frames with the format of  ```frame_XXXXX_XXXXXXXXXXX_XXXXXXXXXXX.png```.
