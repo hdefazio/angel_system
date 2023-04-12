@@ -14,9 +14,9 @@ import pandas as pd
 import numpy as np
 
 
-os.environ['CUDA_VISIBLE_DEVICES'] = '0, 1, 2, 3'
+os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 
-root_dir = '/data/ptg/medical/bbn/Release_v0.5/v0.52'
+root_dir = '/Padlock_DT/Release_v0.5/v0.52'
 #root_dir = '/media/hannah.defazio/Padlock_DT/Data/notpublic/PTG/Release_v0.5'
 
 
