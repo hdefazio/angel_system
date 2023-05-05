@@ -17,7 +17,6 @@ _PREDEFINED_SPLITS_BBN = {
         
         "BBN_M2_labels_with_inter_steps_train": ("", f"{anns_root}/M2_Tourniquet/stage2/m2_with_lab_cleaned_fixed_data_with_inter_steps/M2_with_lab_cleaned_fixed_data_with_inter_steps_stage2_train_contact.mscoco.json"),
         "BBN_M2_labels_with_inter_steps_val": ("", f"{anns_root}/M2_Tourniquet/stage2/m2_with_lab_cleaned_fixed_data_with_inter_steps/M2_with_lab_cleaned_fixed_data_with_inter_steps_stage2_val.mscoco.json"),
-        
     },
 }
 
